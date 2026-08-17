@@ -26,7 +26,7 @@ Archivo -- Propósito
 `Atacable.java`  Interfaz que define que todo personaje atacable debe tener un método `atacar()`.
 `Personaje.java` | Clase abstracta base con `nombre` y `vida`. No se instancía directamente.
 `Enemigo.java` | Clase abstracta para enemigos: agrega `daño` y un contador de enemigos derrotados.
-`MonoVolador.java` | Enemigo del Nivel 1.
+`Monovolador.java` | Enemigo del Nivel 1.
 `MonoVoladorMejorado.java` | Enemigo del Nivel 3: más fuerte que el del Nivel 1.
 `Bruja.java` | Enemiga del Nivel 2.
 `BrujaMejorada.java` | Enemiga del Nivel 4: versión mejorada de la Bruja de Plata.
