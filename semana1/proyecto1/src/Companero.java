@@ -1,7 +1,7 @@
 // Companero IS-A Premio
 public class Companero extends Premio {
 
-    private int bonusDano; // cuanto daño extra aporta en batalla
+    private int bonusDano; // cuanto dano extra aporta en batalla
 
     public Companero(String nombre, String descripcion, int bonusDano) {
         super(nombre, descripcion);

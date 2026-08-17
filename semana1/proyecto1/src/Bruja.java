@@ -1,4 +1,5 @@
 public class Bruja extends Enemigo {
+
     public Bruja(String nombre) {
         super(nombre, 70, 12);
     }

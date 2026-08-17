@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 // GENERICS: "T extends Premio" significa que esta clase sirve para guardar
-// cualquier tipo de Premio (o algo que herede de Premio), sin repetir código.
+// cualquier tipo de Premio (o algo que herede de Premio), sin repetir codigo.
 public class Inventario<T extends Premio> {
 
     private ArrayList<T> elementos = new ArrayList<>();

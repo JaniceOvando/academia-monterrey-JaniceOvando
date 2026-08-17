@@ -3,7 +3,7 @@ import java.util.ArrayList;
 // SINGLETON: en todo el programa solo puede existir UN objeto Juego.
 public class Juego {
 
-    private static Juego instancia; // aqui se guarda la unica instancia que existirá
+    private static Juego instancia; // aqui se guarda la unica instancia que existira
 
     private ArrayList<Nivel> niveles;
 
@@ -12,7 +12,7 @@ public class Juego {
         niveles = new ArrayList<>();
     }
 
-    // Este es el único modo de conseguir el objeto Juego.
+    // Este es el unico modo de conseguir el objeto Juego.
     public static Juego getInstance() {
         if (instancia == null) {
             instancia = new Juego();

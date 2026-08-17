@@ -3,7 +3,7 @@
 public abstract  class Enemigo extends Personaje {
     protected  int dano;
 
-//static: aqui, doña variable es UNA SOLA y la comparten TODOS los enemigos malos, malvados del jueguito
+//static: aqui, dona variable es UNA SOLA y la comparten TODOS los enemigos malos, malvados del jueguito
     protected static int totalDerrotados = 0;
 
     public Enemigo(String nombre, int vidaMaxima, int dano){

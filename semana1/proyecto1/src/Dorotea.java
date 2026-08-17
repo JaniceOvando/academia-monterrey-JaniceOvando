@@ -25,11 +25,9 @@ public class Dorotea extends Personaje {
     public Inventario<Companero> getCompaneros() {
         return companeros;
     }
-
     public void setZapatos(ZapatosMagicos zapatos) {
         this.zapatos = zapatos;
     }
-
     public ZapatosMagicos getZapatos() {
         return zapatos;
     }
