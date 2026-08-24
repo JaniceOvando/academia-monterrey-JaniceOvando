@@ -3,8 +3,8 @@ package com.luv2code.springboot.cruddemo.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "employees")
-public class Employee {
+@Document(collection = "libros")
+public class Libro {
 
     // define fields
     //
@@ -23,11 +23,11 @@ public class Employee {
 
 
     // define constructors
-    public Employee() {
+    public Libro() {
 
     }
 
-    public Employee(String firstName, String lastName, String email) {
+    public Libro(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -70,7 +70,7 @@ public class Employee {
     // define toString
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Libro{" +
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
