@@ -38,7 +38,7 @@ public class LibroRestController {
         Libro theLibro = libroService.findById(libroId);
 
         if (theLibro == null) {
-            throw new RuntimeException("Libro id not found - " + employeeId);
+            throw new RuntimeException("Libro id not found - " + libroId);
         }
 
         return theLibro;
@@ -71,7 +71,6 @@ public class LibroRestController {
 
     // add mapping for PATCH /employees/{employeeId} - patch employee ... partial
     // update
-
     @PatchMapping("/employees/{employeeId}")
     public Employee patchEmployee(@PathVariable int employeeId,
             @RequestBody Map<String, Object> patchPayload) {
