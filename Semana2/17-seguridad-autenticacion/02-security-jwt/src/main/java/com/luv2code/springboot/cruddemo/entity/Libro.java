@@ -3,8 +3,8 @@ package com.luv2code.springboot.cruddemo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="employee")
-public class Employee {
+@Table(name="libro")
+public class Libro {
 
     // define fields
     @Id
@@ -12,25 +12,29 @@ public class Employee {
     @Column(name="id")
     private int id;
 
-    @Column(name="first_name")
-    private String firstName;
+    @Column(name="titulo")
+    private String titulo;
 
-    @Column(name="last_name")
-    private String lastName;
+    @Column(name="autor")
+    private String autor;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="isbn")
+    private String isbn;
+
+    @Column (name="precio")
+    private double precio;
 
 
     // define constructors
-    public Employee() {
+    public Libro() {
 
     }
 
-    public Employee(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
+    public Libro(String titulo, String autor, String isbn, double precio) {
+        this.titulo= titulo;
+        this.autor= autor;
+        this.isbn= isbn;
+        this.precio= precio;
     }
 
     // define getter/setter
@@ -38,43 +42,40 @@ public class Employee {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getTitulo() {
+        return titulo;
+    }
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getAutor() {
+        return autor;
+    }
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getIsbn() { return isbn;
     }
+    public void setIsbn(String isbn) { this.isbn = isbn; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public double setPrecio() { return precio; }
+    public void  setPrecio(double precio) { this.precio = precio; }
 
     // define toString
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Libro{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
+                ", titulo ='" + titulo + '\'' +
+                ", autor ='" + autor + '\'' +
+                ", isbn ='" + isbn + '\'' +
+                ", precio ='" + precio + '\'' +
                 '}';
     }
 }

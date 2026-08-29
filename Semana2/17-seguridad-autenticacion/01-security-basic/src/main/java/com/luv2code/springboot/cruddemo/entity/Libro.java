@@ -60,31 +60,22 @@ public class Libro {
         this.autor = autor;
     }
 
-
-    public String getLastName() {
-        return lastName;
+    public String getIsbn() { return isbn;
     }
+    public void setIsbn(String isbn) { this.isbn = isbn; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public double setPrecio() { return precio; }
+    public void  setPrecio(double precio) { this.precio = precio; }
 
     // define toString
     @Override
     public String toString() {
         return "Libro{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
+                ", titulo ='" + titulo + '\'' +
+                ", autor ='" + autor + '\'' +
+                ", isbn ='" + isbn + '\'' +
+                ", precio ='" + precio + '\'' +
                 '}';
     }
 }
