@@ -16,7 +16,12 @@ public class WebFluxController {
     // 1. MONO: Representa 0 o 1 elemento
     @GetMapping("/mono")
     public Mono<String> getMono() {
-        return Mono.just("Hola, soy un Mono. Solo devuelvo UN dato.");
+
+
+        // return Mono.just("Hola, soy un Mono. Solo devuelvo UN dato.");
+
+        // (rompido, quebrado invalidado, valio chetitos de queso :D):
+        return Mono.just("Hola, soy un Mono. Solo devuelvo UN dato ERRADO."); // Error a propósito
     }
 
     // 2. FLUX: Representa 0 a N elementos (con retraso para simular lentitud)
