@@ -1,0 +1,85 @@
+# Proyecto Selenium — Pruebas automatizadas del sitio de Banco Santander México
+
+## ¿Qué hace este proyecto?
+
+Es una suite de pruebas automatizadas escrita en Java con **Selenium WebDriver** y **TestNG**, que valida partes del sitio público de Banco Santander México (`https://www.santander.com.mx/`). El objetivo es comprobar que el sitio carga correctamente y que ciertos elementos de navegación clave están presentes y funcionan.
+
+El proyecto sigue el patrón **Page Object Model (POM)**: cada página del sitio se representa como una clase, y las pruebas solo interactúan con esas clases en vez de buscar elementos directamente. Esto hace que si el sitio cambia un selector, solo hay que corregirlo en un lugar.
+
+## Estructura del proyecto
+
+```
+src/
+├── base/
+│   ├── BaseTest.java       # arranca y cierra el navegador antes/después de cada prueba
+│   └── BasePage.java       # métodos reutilizables (click, escribir, esperar, etc.)
+├── pages/
+│   ├── HomePage.java             # página principal del sitio
+│   └── AcercaDelBancoPage.java   # sección "Acerca del Banco"
+└── tests/
+    └── SantanderTest.java  # las 3 pruebas
+```
+
+### `BaseTest`
+Antes de cada prueba (`@BeforeMethod`) levanta un ChromeDriver usando **WebDriverManager** (que descarga y configura automáticamente la versión correcta del driver, sin tener que instalarlo manualmente). El Chrome se abre con opciones para:
+- Evitar que el sitio detecte que es un navegador automatizado (`disable-blink-features=AutomationControlled`, se desactiva la extensión de automatización)
+- Correr en modo compatible con entornos sin sandbox (útil si más adelante se corre en CI/CD o en una máquina Linux)
+- Iniciar maximizado
+
+Después de cada prueba (`@AfterMethod`) cierra el navegador.
+
+### `BasePage`
+Es la clase padre de todas las páginas. Centraliza la espera explícita (`WebDriverWait` de 15 segundos) y expone métodos comunes: `find`, `findAll`, `click`, `write`, `text`, `isDisplayed`, `waitForUrlContains`. Así ninguna página tiene que reescribir su propia lógica de espera.
+
+### `HomePage`
+Representa la página de inicio. Tiene métodos para:
+- `open()` — navega a la URL del sitio
+- `acceptCookiesIfPresent()` — acepta el banner de cookies si aparece (usando un XPath que busca botones con texto tipo "aceptar" o el id típico de OneTrust)
+- `goToAcercaDelBanco()` — da clic en el menú "Acerca del Banco" y regresa el objeto de esa página
+- `isSostenibilidadLinkVisible()` / `isBlogLinkVisible()` — verifican si esos links están visibles en el home
+
+### `AcercaDelBancoPage`
+Representa la sección "Acerca del Banco". Verifica la visibilidad de varios links internos: Fundación Santander, Sostenibilidad, Inversionistas, Bolsa de trabajo.
+
+### `SantanderTest`
+Las pruebas reales:
+
+| Prueba | Qué valida |
+|---|---|
+| `shouldLoadHomePage` | Que el home cargue y que el título de la página contenga "Santander" |
+| `shouldNavigateToAcercaDelBanco` | Que al hacer clic en el menú "Acerca del Banco" se llegue a esa sección y se vea el link "Fundación Santander" |
+| `shouldSeeSostenibilidadOption` | Que el link "Sostenibilidad" esté visible en el home |
+
+## Tecnologías usadas
+
+- **Java**
+- **Selenium WebDriver** — automatización del navegador
+- **TestNG** — framework de pruebas (anotaciones `@Test`, `@BeforeMethod`, `@AfterMethod`)
+- **WebDriverManager** (Bonigarcia) — gestión automática del ChromeDriver
+- **Page Object Model** como patrón de diseño
+
+## Cómo se ejecuta
+
+Desde el proyecto, con Maven (o el runner de TestNG que tenga configurado el IDE):
+
+```
+mvn test
+```
+
+Esto corre las 3 pruebas de `SantanderTest`, cada una abriendo Chrome, navegando al sitio real de Santander México, y verificando la condición correspondiente.
+
+## Resultado de la ejecución
+
+Al correr la suite, las **3 pruebas pasaron correctamente**:
+
+- `shouldLoadHomePage`
+- `shouldNavigateToAcercaDelBanco`
+- `shouldSeeSostenibilidadOption`
+
+> **Pendiente:** agregar aquí una captura de pantalla del reporte de TestNG (o el texto de la consola) que muestre las 3 pruebas en verde. Se puede obtener corriendo `mvn test` y tomando captura de la terminal, o abriendo `test-output/index.html` que genera TestNG después de correr las pruebas.
+
+## Qué aprendí / retos
+
+- Los banners de cookies pueden bloquear las interacciones si no se manejan antes de continuar, por eso `acceptCookiesIfPresent()` se llama justo después de `open()` en cada prueba.
+- Usar `WebDriverWait` en vez de `Thread.sleep()` evita que las pruebas fallen por lentitud de carga del sitio real (que no está bajo mi control, a diferencia de un ambiente de prueba propio).
+- Separar las páginas del sitio en clases (Page Object Model) hizo que las 3 pruebas quedaran cortas y legibles, sin repetir selectores.
